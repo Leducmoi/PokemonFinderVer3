@@ -7,7 +7,6 @@ function BodyList() {
   const [offset, setOffset] = useState(0);
   const limit = 16;
 
-  // Hàm fetch thêm Pokémon
   async function fetchPokemons(currentOffset) {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentOffset}`);
     const data = await res.json();
@@ -23,16 +22,18 @@ function BodyList() {
         };
       })
     );
-    // Nối thêm vào danh sách cũ
-    setPokemons(prev => [...prev, ...details]);
+    // Loại bỏ trùng lặp id
+    setPokemons(prev => {
+      const ids = new Set(prev.map(p => p.id));
+      const newPokemons = details.filter(p => !ids.has(p.id));
+      return [...prev, ...newPokemons];
+    });
   }
 
-  // Lần đầu load
   useEffect(() => {
     fetchPokemons(0);
   }, []);
 
-  // Xử lý khi bấm Load More
   const handleLoadMore = () => {
     const newOffset = offset + limit;
     setOffset(newOffset);
@@ -57,7 +58,7 @@ function BodyList() {
         <div className="row">
           <div className="col-12">
             <div className="load-more-wrapper">
-              <button className="btn-loadMore" onClick={handleLoadMore}>
+              <button className="btn-loadMore btn-primary" onClick={handleLoadMore}>
                 Load More
               </button>
             </div>
