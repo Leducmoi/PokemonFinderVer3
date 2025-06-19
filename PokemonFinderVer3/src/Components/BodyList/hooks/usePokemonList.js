@@ -1,28 +1,22 @@
 import { useState } from "react";
-import { getPokemonList } from "./fetchAPI/getPokemonList";
+import { getPokemonList } from "../Utils/getPokemonList";
+import {mergeUniquePokemons} from "../Utils/mergeUniquePokemons";
+import {getNextOffset} from "../Utils/getNextOffset";
 
 export default function usePokemonList(limit = 16) {
-    const [pokemons, setPokemons] = useState([]);
-    const [offset, setOffset] = useState(0);
+  const [pokemons, setPokemons] = useState([]);
+  const [offset, setOffset] = useState(0);
 
+  async function fetchPokemons(currentOffset = 0) {
+    const details = await getPokemonList(limit, currentOffset);
+    setPokemons(prev => mergeUniquePokemons(prev, details));
+    setOffset(currentOffset);
+  }
 
-    // Fetch pokemons from the API with a given limit and offset
-    async function fetchPokemons(currentOffset = 0) {
-        const details = await getPokemonList(limit, currentOffset);
-        setPokemons(prev => {
-            const ids = new Set(prev.map(p => p.id));
-            const newPokemons = details.filter(p => !ids.has(p.id));
-            return [...prev, ...newPokemons];
-        });
-        setOffset(currentOffset);
-    }
+  function loadMore() {
+    const newOffset = getNextOffset(offset, limit);
+    fetchPokemons(newOffset);
+  }
 
-
-    // Load more pokemons by increasing the offset of button click
-    // and fetching the next set of pokemons
-    function loadMore() {
-        fetchPokemons(offset + limit);
-    }
-
-    return { pokemons, fetchPokemons, loadMore };
+  return { pokemons, fetchPokemons, loadMore };
 }
