@@ -1,5 +1,23 @@
-@use "../../../../assets/scss/base/variables";
-
+@use "../../../../assets/scss/base/variables" as variables;
+.type-badge.type-normal   { background-color: variables.$color-type-normal; }
+.type-badge.type-fire     { background-color: variables.$color-type-fire; }
+.type-badge.type-water    { background-color: variables.$color-type-water; }
+.type-badge.type-electric { background-color: variables.$color-type-electric; }
+.type-badge.type-grass    { background-color: variables.$color-type-grass; }
+.type-badge.type-ice      { background-color: variables.$color-type-ice; }
+.type-badge.type-fighting { background-color: variables.$color-type-fighting; }
+.type-badge.type-poison   { background-color: variables.$color-type-poison; }
+.type-badge.type-ground   { background-color: variables.$color-type-ground; }
+.type-badge.type-flying   { background-color: variables.$color-type-flying; }
+.type-badge.type-psychic  { background-color: variables.$color-type-psychic; }
+.type-badge.type-bug      { background-color: variables.$color-type-bug; }
+.type-badge.type-rock     { background-color: variables.$color-type-rock; }
+.type-badge.type-ghost    { background-color: variables.$color-type-ghost; }
+.type-badge.type-dragon   { background-color: variables.$color-type-dragon; }
+.type-badge.type-dark     { background-color: variables.$color-type-dark; }
+.type-badge.type-steel    { background-color: variables.$color-type-steel; }
+.type-badge.type-fairy    { background-color: variables.$color-type-fairy; }
+@import "../../../../assets/scss/base/variables";
 .card-pokemon {
     margin: 10px;
     display: flex;
@@ -47,8 +65,13 @@
         }
         .type-badge{
             text-transform: uppercase;
-            font-size: 0.8em;
-
+            font-size: 0.5em;
+            font-weight: 700;
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px 2px;
+            border-radius: 5px;
+            min-width: 100px;
         }
     }
 
@@ -57,7 +80,7 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         transform: translateY(-5px);
         transition: all 0.3s ease;
-
+        cursor: pointer;
         .card-pokemon__img img {
             transform: scale(1.15);
         }
