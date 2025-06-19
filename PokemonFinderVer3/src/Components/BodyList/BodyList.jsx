@@ -1,44 +1,15 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 import "./BodyList.scss";
 import CardPokemon from "./innerbody/Card/CardPokemon.jsx";
+import LoadMoreButton from "./innerbody/LoadMoreButton/LoadMoreButton.jsx";
+import usePokemonList from "./hooks/usePokemonList.js";
 
 function BodyList() {
-  const [pokemons, setPokemons] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const limit = 16;
-
-  async function fetchPokemons(currentOffset) {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${currentOffset}`);
-    const data = await res.json();
-    const details = await Promise.all(
-      data.results.map(async (poke) => {
-        const res = await fetch(poke.url);
-        const detail = await res.json();
-        return {
-          id: detail.id,
-          name: detail.name,
-          image: detail.sprites.front_default,
-          types: detail.types.map((t) => t.type.name),
-        };
-      })
-    );
-    // Loại bỏ trùng lặp id
-    setPokemons(prev => {
-      const ids = new Set(prev.map(p => p.id));
-      const newPokemons = details.filter(p => !ids.has(p.id));
-      return [...prev, ...newPokemons];
-    });
-  }
+  const { pokemons, fetchPokemons, loadMore } = usePokemonList(16);
 
   useEffect(() => {
     fetchPokemons(0);
   }, []);
-
-  const handleLoadMore = () => {
-    const newOffset = offset + limit;
-    setOffset(newOffset);
-    fetchPokemons(newOffset);
-  };
 
   return (
     <div className="Bodylist">
@@ -57,11 +28,7 @@ function BodyList() {
         </div>
         <div className="row">
           <div className="col-12">
-            <div className="load-more-wrapper">
-              <button className="btn-loadMore btn-primary" onClick={handleLoadMore}>
-                Load More
-              </button>
-            </div>
+            <LoadMoreButton onClick={loadMore} />
           </div>
         </div>
       </div>

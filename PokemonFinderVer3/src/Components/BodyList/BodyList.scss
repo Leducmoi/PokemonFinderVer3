@@ -7,6 +7,11 @@
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
+        align-items: center;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        
         cursor: pointer;
         &:hover {
             background-color: rgb(255, 140, 0);
