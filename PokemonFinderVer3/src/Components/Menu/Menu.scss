@@ -1,1 +1,93 @@
-@use "@material/slider/styles";
+@use "sass:color";
+
+@import '../../assets/scss/main.scss';
+
+.menu{
+    background-color: $color-background-secondary;
+    .container {
+        height: 100px;
+        background-color: rgb(224, 224, 224);
+    }
+    &-filter {
+        height: 100px;
+
+        &-option {
+            background-color: $color-button-primary;
+            color: $color-primary;
+            font-weight: 900;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: color.adjust($color-button-primary, $lightness: -10%);
+            }
+        }
+
+        &-reset {
+            background-color: $color-button-reset;
+            color: color.adjust($color-button-reset, $lightness: -20%);
+            font-weight: 900;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 2.5px 0px;
+        }
+
+        &-IdFilterSlider {
+            background-color: $color-button-primary;
+            color: $color-primary;
+            font-weight: 900;
+            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &-text {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 0 10px;
+            }
+        }
+    }
+    &-other {
+        height: 100px;
+    }
+
+    &-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+
+
+        &-input {
+            background-color: $color-button-primary;
+            color: $color-primary;
+            font-weight: 900;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 2.5px 0px;
+            
+        }
+
+        &-button {
+            font-weight: 900;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 2.5px 10px;
+
+            &:hover {
+                background-color: color.adjust($color-button-primary, $lightness: -10%);
+            }
+        }
+    }
+}
