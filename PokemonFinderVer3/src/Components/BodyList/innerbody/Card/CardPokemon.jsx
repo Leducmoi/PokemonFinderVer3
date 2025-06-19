@@ -12,9 +12,9 @@ function CardPokemon({ id, name, image, types }) {
                 <h3>{name}</h3>
                 <div>
                     {types.map((type) => (
-                        <span key={type} className={`type-badge type-${type}`}>
-                            {type} &nbsp;
-                        </span>
+                        <div key={type} className={`type-badge type-${type}`}>
+                            {type}
+                        </div>
                     ))}
                 </div>
             </div>
