@@ -1,21 +1,29 @@
-import { memo } from "react";
+import { memo,useState } from "react";
 import "./Menu.scss";
 import Slider from "./InnerComponents/Slider.jsx";
-import { AiOutlineCaretDown, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
+import MenuFilterOption from "./InnerComponents/MenuFilterOption.jsx";
+import MenuFilterModal from "./InnerComponents/MenuFilterModal/MenuFilterModal.jsx";
 
 
 function Menu() {
+  const [openFilter, setOpenFilter] = useState(null);
+  const handleFilterOptionClick = (option) => {
+    setOpenFilter(option);
+  };
+  const handleCloseModal = () => setOpenFilter(null);
 
   return (
+
     <>
       <div className="menu">
         <div className="container">
           <div className="row">
             <div className="col-md-6 menu-filter">
               <div className="row" style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-                <div className="col-md-4 col-sm-4 col-xs-4 menu-filter-option">TYPES <AiOutlineCaretDown /></div>
-                <div className="col-md-4 col-sm-4 col-xs-4 menu-filter-option">ABILITIES <AiOutlineCaretDown /></div>
-                <div className="col-md-4 col-sm-4 col-xs-4 menu-filter-option">STATS <AiOutlineCaretDown /></div>
+                <MenuFilterOption label="TYPES" onClick={() => handleFilterOptionClick("TYPES")} />
+                <MenuFilterOption label="ABILITIES" onClick={() => handleFilterOptionClick("ABILITIES")} />
+                <MenuFilterOption label="STATS" onClick={() => handleFilterOptionClick("STATS")} />
               </div>
               <div className="row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <div className="col-md-9 col-sm-9 col-xs-9 menu-filter-IdFilterSlider" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -41,6 +49,8 @@ function Menu() {
           </div>
         </div>
       </div>
+
+      <MenuFilterModal openFilter={openFilter} onClose={handleCloseModal} />
     </>
   );
 }
