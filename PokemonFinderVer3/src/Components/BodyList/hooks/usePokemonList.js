@@ -3,7 +3,7 @@ import { getPokemonList } from "../Utils/getPokemonList";
 import {mergeUniquePokemons} from "../Utils/mergeUniquePokemons";
 import {getNextOffset} from "../Utils/getNextOffset";
 
-export default function usePokemonList(limit = 16) {
+export default function usePokemonList(limit) {
   const [pokemons, setPokemons] = useState([]);
   const [offset, setOffset] = useState(0);
 

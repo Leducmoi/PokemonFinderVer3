@@ -5,7 +5,7 @@ import LoadMoreButton from "./innerbody/LoadMoreButton/LoadMoreButton.jsx";
 import usePokemonList from "./hooks/usePokemonList.js";
 
 function BodyList() {
-  const setLimit = 50;
+  const setLimit = 20;
 
   const { pokemons, fetchPokemons, loadMore } = usePokemonList(setLimit);
 
