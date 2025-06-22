@@ -1,0 +1,70 @@
+@use "sass:color";
+@use "../../../../../assets/scss/base/variables" as va;
+
+.Bug {background-color: va.$color-type-bug;}
+.Fire {background-color: va.$color-type-fire;}
+.Grass {background-color: va.$color-type-grass;}
+.Water {background-color: va.$color-type-water;}
+.Electric {background-color: va.$color-type-electric;}
+.Psychic {background-color: va.$color-type-psychic;}
+.Ice {background-color: va.$color-type-ice;}
+.Dragon {background-color: va.$color-type-dragon;}
+.Dark {background-color: va.$color-type-dark;}
+.Fairy {background-color: va.$color-type-fairy;}
+.Normal {background-color: va.$color-type-normal;}
+.Fighting {background-color: va.$color-type-fighting;}
+.Poison {background-color: va.$color-type-poison;}
+.Ground {background-color: va.$color-type-ground;}
+.Rock {background-color: va.$color-type-rock;}
+.Steel {background-color: va.$color-type-steel;}
+.Ghost {background-color: va.$color-type-ghost;}
+.Flying {
+  background-color: va.$color-type-flying;
+}
+
+.type {
+    margin: 10px 0;
+    &-item {
+        display: flex;
+        align-items: center;
+        width: 90%;
+        padding: 5px;
+        border-radius: 30px;
+
+        img {
+            width: 25px;
+            height: 25px;
+            display: block;
+            align-items: center;
+            justify-content: center;
+            margin-left: 30px;
+        }
+
+        span {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-right: 30px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease-in-out;
+            transform: scale(1.05);
+            transform: translateY(-2px);
+        }
+
+        &:hover img {
+            transform: scale(1.5);
+            transition: transform 0.4s ease-in-out;
+        }
+    }
+}
+
+
