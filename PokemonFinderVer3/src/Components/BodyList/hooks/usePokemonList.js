@@ -22,15 +22,12 @@ export default function usePokemonList(limit) {
     fetchPokemons(newOffset);
   }
 
-  // Hàm lọc theo type
   function filterByType(types, mode) {
     setSelectedTypes(types);
     setFilterMode(mode);
     setFiltered(filterPokemonsByType(pokemons, types, mode));
   }
 
-
-  // Trả về danh sách đã lọc nếu có, không thì trả về tất cả
   const displayPokemons = filtered.length > 0 ? filtered : pokemons;
 
   return {
@@ -39,8 +36,8 @@ export default function usePokemonList(limit) {
     loadMore,
     filterByType,
     selectedTypes,
-    filterMode,
     setSelectedTypes,
+    filterMode,
     setFilterMode,
   };
 }

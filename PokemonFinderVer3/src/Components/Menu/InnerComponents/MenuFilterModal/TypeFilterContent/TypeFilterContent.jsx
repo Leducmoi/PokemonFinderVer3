@@ -1,25 +1,38 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import "./TypeFilterContent.scss";
 import { POKEMON_TYPES } from "./innerContent/pokemonTypes";
 import TypeItem from "./innerContent/TypeItem";
 import TypeActionButtons from "./innerContent/TypeActionButtons";
 
-function TypeFilterContent( { filterByType }) {
-  const [selectedTypes, setSelectedTypes] = useState([]);
-  const [filterMode, setFilterMode] = useState(""); 
-
+function TypeFilterContent({
+  filterByType,
+  selectedTypes,
+  setSelectedTypes,
+  filterMode,
+  setFilterMode,
+}) {
   const handleTypeClick = (typeName) => {
-    if (selectedTypes.includes(typeName)) {
-      setSelectedTypes(selectedTypes.filter(t => t !== typeName));
+    const lowerType = typeName.toLowerCase();
+    if (selectedTypes.includes(lowerType)) {
+      setSelectedTypes(selectedTypes.filter((t) => t !== lowerType));
       setFilterMode("");
     } else if (selectedTypes.length < 2) {
-      setSelectedTypes([...selectedTypes, typeName]);
+      setSelectedTypes([...selectedTypes, lowerType]);
     }
   };
 
-  const handleOnlyOneType = () => filterByType(selectedTypes, "one");
-  const handleMultipleTypes = () => filterByType(selectedTypes, "multi");
-  const handleConfirm = () => filterByType(selectedTypes, "confirm");
+  const handleOnlyOneType = () => {
+    console.log("Only one type clicked", selectedTypes);
+    filterByType(selectedTypes, "one");
+  };
+  const handleMultipleTypes = () => {
+    console.log("Can be multiple types clicked", selectedTypes);
+    filterByType(selectedTypes, "multi");
+  };
+  const handleConfirm = () => {
+    console.log("Confirm clicked", selectedTypes);
+    filterByType(selectedTypes, "confirm");
+  };
 
   return (
     <div>
@@ -30,8 +43,11 @@ function TypeFilterContent( { filterByType }) {
             <TypeItem
               key={type.name}
               type={type}
-              selected={selectedTypes.includes(type.name)}
-              dimmed={selectedTypes.length > 0 && !selectedTypes.includes(type.name)}
+              selected={selectedTypes.includes(type.name.toLowerCase())}
+              dimmed={
+                selectedTypes.length > 0 &&
+                !selectedTypes.includes(type.name.toLowerCase())
+              }
               onClick={handleTypeClick}
             />
           ))}

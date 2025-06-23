@@ -1,17 +1,19 @@
 export function filterPokemonsByType(pokemons, selectedTypes, filterMode) {
   if (!selectedTypes.length) return pokemons;
 
+  const lowerSelected = selectedTypes.map(t => t.toLowerCase());
+
   if (filterMode === "one") {
     // Chỉ lấy pokemon có đúng 1 hệ và hệ đó nằm trong selectedTypes
     return pokemons.filter(
-      (p) => p.types.length === 1 && selectedTypes.includes(p.types[0])
+      (p) => p.types.length === 1 && lowerSelected.includes(p.types[0].toLowerCase())
     );
   }
 
   if (filterMode === "multi") {
     // Lấy pokemon có ít nhất 1 hệ thuộc selectedTypes
     return pokemons.filter(
-      (p) => p.types.some((t) => selectedTypes.includes(t))
+      (p) => p.types.some((t) => lowerSelected.includes(t.toLowerCase()))
     );
   }
 
@@ -20,7 +22,7 @@ export function filterPokemonsByType(pokemons, selectedTypes, filterMode) {
     return pokemons.filter(
       (p) =>
         p.types.length === 2 &&
-        selectedTypes.every((type) => p.types.includes(type))
+        lowerSelected.every((type) => p.types.map(t => t.toLowerCase()).includes(type))
     );
   }
 

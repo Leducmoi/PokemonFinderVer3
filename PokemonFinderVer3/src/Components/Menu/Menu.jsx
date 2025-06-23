@@ -4,23 +4,12 @@ import Slider from "./InnerComponents/Slider.jsx";
 import { AiOutlineSearch } from "react-icons/ai";
 import MenuFilterOption from "./InnerComponents/MenuFilterOption.jsx";
 import MenuFilterModal from "./InnerComponents/MenuFilterModal/MenuFilterModal.jsx";
-import usePokemonList from "../BodyList/hooks/usePokemonList";
 
 
-function Menu() {
+function Menu(props) {
   const [openFilter, setOpenFilter] = useState(null);
-  const handleFilterOptionClick = (option) => {
-    setOpenFilter(option);
-  };
+  const handleFilterOptionClick = (option) => setOpenFilter(option);
   const handleCloseModal = () => setOpenFilter(null);
-  const {
-    pokemons,
-    fetchPokemons,
-    loadMore,
-    filterByType,
-    selectedTypes,
-    filterMode,
-  } = usePokemonList(16);
   return (
 
     <>
@@ -61,9 +50,11 @@ function Menu() {
       <MenuFilterModal
         openFilter={openFilter}
         onClose={handleCloseModal}
-        filterByType={filterByType}
-        selectedTypes={selectedTypes}
-        filterMode={filterMode}
+        filterByType={props.filterByType}
+        selectedTypes={props.selectedTypes}
+        setSelectedTypes={props.setSelectedTypes}
+        filterMode={props.filterMode}
+        setFilterMode={props.setFilterMode}
       />
     </>
   );
