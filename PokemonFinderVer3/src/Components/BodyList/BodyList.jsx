@@ -4,10 +4,12 @@ import CardPokemon from "./innerbody/Card/CardPokemon.jsx";
 import LoadMoreButton from "./innerbody/LoadMoreButton/LoadMoreButton.jsx";
 import usePokemonList from "./hooks/usePokemonList.js";
 
+
+
 function BodyList() {
   const setLimit = 20;
 
-  const { pokemons, fetchPokemons, loadMore } = usePokemonList(setLimit);
+  const { pokemons, fetchPokemons, loadMore, filterByType, selectedTypes, filterMode } = usePokemonList(setLimit);
 
   useEffect(() => {
     fetchPokemons(0);
