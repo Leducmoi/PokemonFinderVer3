@@ -1,4 +1,4 @@
-import { memo,useState } from "react";
+import { memo, useState } from "react";
 import "./Menu.scss";
 import Slider from "./InnerComponents/Slider.jsx";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -6,13 +6,10 @@ import MenuFilterOption from "./InnerComponents/MenuFilterOption.jsx";
 import MenuFilterModal from "./InnerComponents/MenuFilterModal/MenuFilterModal.jsx";
 
 
-function Menu() {
+function Menu(props) {
   const [openFilter, setOpenFilter] = useState(null);
-  const handleFilterOptionClick = (option) => {
-    setOpenFilter(option);
-  };
+  const handleFilterOptionClick = (option) => setOpenFilter(option);
   const handleCloseModal = () => setOpenFilter(null);
-
   return (
 
     <>
@@ -50,7 +47,15 @@ function Menu() {
         </div>
       </div>
 
-      <MenuFilterModal openFilter={openFilter} onClose={handleCloseModal} />
+      <MenuFilterModal
+        openFilter={openFilter}
+        onClose={handleCloseModal}
+        filterByType={props.filterByType}
+        selectedTypes={props.selectedTypes}
+        setSelectedTypes={props.setSelectedTypes}
+        filterMode={props.filterMode}
+        setFilterMode={props.setFilterMode}
+      />
     </>
   );
 }

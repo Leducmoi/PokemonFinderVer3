@@ -2,13 +2,8 @@ import { memo, useEffect } from "react";
 import "./BodyList.scss";
 import CardPokemon from "./innerbody/Card/CardPokemon.jsx";
 import LoadMoreButton from "./innerbody/LoadMoreButton/LoadMoreButton.jsx";
-import usePokemonList from "./hooks/usePokemonList.js";
 
-function BodyList() {
-  const setLimit = 20;
-
-  const { pokemons, fetchPokemons, loadMore } = usePokemonList(setLimit);
-
+function BodyList({ pokemons, fetchPokemons, loadMore }) {
   useEffect(() => {
     fetchPokemons(0);
   }, []);
@@ -18,7 +13,10 @@ function BodyList() {
       <div className="container">
         <div className="row">
           {pokemons.map((pokemon) => (
-            <div className="col-12 col-xs-12 col-sm-6 col-md-4 col-lg-3" key={pokemon.id}>
+            <div
+              className="col-12 col-xs-12 col-sm-6 col-md-4 col-lg-3"
+              key={pokemon.id}
+            >
               <CardPokemon
                 id={pokemon.id}
                 name={pokemon.name}

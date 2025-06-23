@@ -67,4 +67,8 @@
     }
 }
 
-
+.type-item.dim {
+  filter: brightness(50%);
+  opacity: 0.7;
+  transition: filter 0.3s, opacity 0.3s;
+}
